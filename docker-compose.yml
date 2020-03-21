@@ -1,0 +1,31 @@
+version: "3.7"
+services: 
+    pg:
+        image: postgres
+        environment: 
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        ports:
+            - '5435:5432'
+        restart: always
+
+    app:
+        container_name: node-pg-docker
+        build: 
+            context: .
+        environment: 
+            DATABASE_URL: "postgres://postgres:postgres@pg:5432/postgres"
+            PORT: 3000
+        depends_on: 
+            - pg
+        ports: 
+            - '80:3000'
+        volumes: 
+            - .:/app/
+            - /app/node_modules
+        command: npm start
+        restart: always
+
+# volumes: 
+#     sampledb:
