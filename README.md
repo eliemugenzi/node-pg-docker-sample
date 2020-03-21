@@ -10,7 +10,7 @@
 - Run this command
 
 ```bash
-- docker-compose up
+$ docker-compose up
 ```
 
 - Visit `http://localhost`
